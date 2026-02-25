@@ -1,13 +1,11 @@
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import Login from "@/components/ui/auth/login-form";
 
 export default function Home() {
   return (
-    <div className="flex h-screen items-center justify-center">
-      <Button>Click Me</Button>
-      <Button variant="outline">Outline</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="ghost">Ghost</Button>
-<Button variant="link">Link</Button>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <Login></Login>
+      
     </div>
-  )
+  );
 }
