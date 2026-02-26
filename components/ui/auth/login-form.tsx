@@ -1,58 +1,84 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+export default function RegisterForm() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Handle login logic here
-        console.log("Email:", email);
-        console.log("Password:", password);
-    };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Register form submitted");
+  };
 
-    return (
-        <form onSubmit={handleSubmit}
-         className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md space-y-5">
-            <h2 className="text-2xl font-bold text-center">Login</h2>
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white p-4">
+      <Card className="w-full max-w-md shadow-xl border">
+        <CardHeader>
+          <CardTitle className="text-center text-2xl font-bold text-blue-700">
+            Create Account
+          </CardTitle>
+        </CardHeader>
+
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-                <label htmlFor="email" className=" text-sm font-medium text-gray-700">Email</label>
-                <input
-
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm outline-none focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    required
-                    placeholder="youremail@example.com"
-                />
+              <Label htmlFor="fullName">Full Name</Label>
+              <Input
+                id="fullName"
+                required
+                placeholder="Enter full name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
             </div>
-            <div className="mb-4">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-                <input  
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    required
-                    placeholder="°°°°°°°°"
-                />
-            </div>
-            <button
 
-                type="submit"
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                required
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                required
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700"
             >
-                Login
-            </button>
+              Create Account
+            </Button>
+          </form>
 
-            <p className="mt-4 text-sm text-gray-600 text-center">
-                Don't have an account? <a href="register" className="text-blue-500 hover:underline">Register</a>
-            </p>
-        </form>
-    );
+          <p className="text-sm text-center text-gray-500 mt-4">
+            Already have account?{" "}
+            <Link href="/login" className="text-blue-600 hover:underline">
+              Login
+            </Link>
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  );
 }
