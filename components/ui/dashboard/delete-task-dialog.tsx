@@ -28,7 +28,7 @@ export default function DeleteTaskDialog({
   if (!selectedTask) return null;
 
   const handleDelete = () => {
-    deleteTask(selectedTask.id);
+    deleteTask(Number(selectedTask.id));
     setOpen(false);
   };
 
