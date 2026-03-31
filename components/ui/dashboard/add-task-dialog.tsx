@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useState } from "react";
@@ -33,7 +31,7 @@ export default function AddTaskDialog({
     if (!title || !description || !dueDate) return;
 
     addTask({
-      id: Date.now(), 
+      id: Date.now(),
       title,
       description,
       dueDate,
@@ -48,7 +46,6 @@ export default function AddTaskDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="rounded-3xl p-8 shadow-2xl">
-        
         <DialogHeader>
           <DialogTitle className="text-2xl text-center font-bold ">
             Add New Task
@@ -56,7 +53,6 @@ export default function AddTaskDialog({
         </DialogHeader>
 
         <div className="space-y-6 mt-6">
-          
           <div className="space-y-2">
             <Label className="font-bold">Task Title</Label>
             <Input
@@ -105,7 +101,6 @@ export default function AddTaskDialog({
               Save Task
             </Button>
           </div>
-
         </div>
       </DialogContent>
     </Dialog>
