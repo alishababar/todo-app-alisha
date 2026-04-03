@@ -27,7 +27,7 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   
-  stripeCustomerId String?  
+  stripeCustomerId String?  @unique
   subscriptionPlan String?  
 
   sessions      Session[]

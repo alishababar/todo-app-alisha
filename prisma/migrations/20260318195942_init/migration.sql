@@ -6,6 +6,7 @@ CREATE TABLE "Task" (
     "dueDate" TIMESTAMP(3),
     "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CREATE UNIQUE INDEX "user_stripeCustomerId_key" ON "user"("stripeCustomerId"),
 
     CONSTRAINT "Task_pkey" PRIMARY KEY ("id")
 );
