@@ -1,40 +1,110 @@
 <<<<<<< HEAD
-# todo-app-alisha
+🚀 SaaS To-Do Application (Next.js + Stripe)
+A full-stack SaaS To-Do application built with Next.js, Prisma, PostgreSQL, and Stripe. This app allows users to manage tasks with a subscription-based model (Free & Pro plans).
+
 =======
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🚀 Task Manager SaaS (Next.js + Stripe)
 
-## Getting Started
+A full-stack SaaS-based task management application built using **Next.js**, **Prisma**, **PostgreSQL**, and **Stripe**.  
+This platform allows users to manage daily tasks while offering a **subscription-based upgrade system** (Free & Pro plans).
 
-First, run the development server:
+---
 
-```bash
+🧩 Key Features
+
+✅ Application Features
+
+- User authentication using Better Auth
+- Full task management (Create, View, Update, Delete)
+- Clean and responsive UI built with Tailwind CSS and shadcn/ui
+
+💳 SaaS Functionality
+
+- Integrated Stripe Checkout for payments
+- Subscription tiers (Free and Pro)
+- Secure payment handling
+- Automatic subscription updates via webhooks
+- Feature restrictions based on user plan
+
+---
+
+💻 Technology Stack
+
+Frontend
+
+- Next.js (App Router)
+- React
+- Tailwind CSS
+- shadcn/ui components
+
+ Backend
+
+- Prisma ORM
+- PostgreSQL (Neon Database)
+- Better Auth for authentication
+
+ Payment System
+
+- Stripe Checkout
+- Stripe Webhooks
+
+---
+
+ ⚙️ Environment Setup
+
+Create a `.env` file in the root directory and add the following:
+
+```env
+DATABASE_URL=your_database_url
+BETTER_AUTH_SECRET=your_secret_key
+BETTER_AUTH_URL=http://localhost:3000
+
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_PUBLISHABLE_KEY=pk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+
+STRIPE_PRICE_PRO=price_...
+STRIPE_PRICE_PREMIUM=price_...
+
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+
+🧠 Application Flow
+  Subscription Process
+- User selects the "Upgrade to Pro" option
+- A Stripe Checkout session is generated
+- User completes the payment process
+- Stripe triggers a webhook event
+- Application updates the user’s subscription status in the database
+
+
+Feature Access Rules
+- Free Plan → Limited to 5 tasks
+- Pro Plan → No task limit
+
+🔄 Webhook Configuration
+
+
+Start the Stripe listener:
+
+stripe listen --forward-to localhost:3000/api/stripe/webhook
+
+Then copy the generated webhook secret into your .env file.
+
+
+
+🚀 Getting Started
+
+Run the following commands:
+
+npm install
+npx prisma migrate dev
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+After that, open: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> feature/login-auth
+📌 Notes
+* Do not expose your .env file publicly
+* Use Stripe test mode for development
+* You can extend this project by adding more plans or features
