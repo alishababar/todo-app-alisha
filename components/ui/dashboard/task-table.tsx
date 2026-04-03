@@ -17,7 +17,7 @@ interface TaskTableProps {
   setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedTask: React.Dispatch<React.SetStateAction<Task | null>>;
   setDeleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  onLogout: () => void;
+  onLogout?: () => void;
 
   
 }
