@@ -68,6 +68,7 @@ STRIPE_PRICE_PREMIUM=price_...
 
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 
+```
 
 🧠 Application Flow
   Subscription Process
@@ -77,33 +78,34 @@ NEXT_PUBLIC_BASE_URL=http://localhost:3000
 - Stripe triggers a webhook event
 - Application updates the user’s subscription status in the database
 
-
+```
 Feature Access Rules
 - Free Plan → Limited to 5 tasks
 - Pro Plan → No task limit
-
+```
 🔄 Webhook Configuration
 
 
 Start the Stripe listener:
 
+```
 stripe listen --forward-to localhost:3000/api/stripe/webhook
 
 Then copy the generated webhook secret into your .env file.
 
-
+```
 
 🚀 Getting Started
 
 Run the following commands:
-
+```
 npm install
 npx prisma migrate dev
 npm run dev
-
+```
 After that, open: http://localhost:3000
 
-
+```
 📌 Notes
 * Do not expose your .env file publicly
 * Use Stripe test mode for development
