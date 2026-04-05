@@ -5,8 +5,10 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2026-03-25.dahlia",
 });
 
-export async function createCheckoutSession(userId: string, plan: "pro" | "premium") {
-
+export async function createCheckoutSession(
+  userId: string,
+  plan: "pro" | "premium",
+) {
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) throw new Error("User not found");
 
@@ -31,8 +33,14 @@ export async function createCheckoutSession(userId: string, plan: "pro" | "premi
     });
   }
 
-  const priceId = plan === "pro" ? process.env.STRIPE_PRICE_PRO : process.env.STRIPE_PRICE_PREMIUM;
-  if (!priceId) throw new Error("Price ID not found. Make sure it's a recurring price and matches your environment.");
+  const priceId =
+    plan === "pro"
+      ? process.env.STRIPE_PRICE_PRO
+      : process.env.STRIPE_PRICE_PREMIUM;
+  if (!priceId)
+    throw new Error(
+      "Price ID not found. Make sure it's a recurring price and matches your environment.",
+    );
 
   const session = await stripe.checkout.sessions.create({
     customer: customerId,

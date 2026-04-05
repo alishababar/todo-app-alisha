@@ -15,7 +15,6 @@ export default function SubscribeSection() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
-      
       <div className="border rounded-2xl p-6 shadow-md hover:shadow-lg transition">
         <h2 className="text-xl font-semibold mb-2">Pro Plan</h2>
         <p className="text-gray-500 mb-4">
@@ -43,7 +42,6 @@ export default function SubscribeSection() {
           Upgrade to Premium
         </button>
       </div>
-
     </div>
   );
 }

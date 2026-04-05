@@ -6,8 +6,8 @@ import { createCheckoutSession } from "@/lib/stripe-server";
 
 export async function handleCheckout(plan: "pro" | "premium") {
   const session = await auth.api.getSession({
-  headers: await headers(),
-});
+    headers: await headers(),
+  });
 
   if (!session?.user) {
     throw new Error("User not logged in");
