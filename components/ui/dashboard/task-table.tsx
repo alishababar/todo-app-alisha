@@ -18,13 +18,9 @@ interface TaskTableProps {
   setSelectedTask: React.Dispatch<React.SetStateAction<Task | null>>;
   setDeleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onLogout?: () => void;
-
-  
 }
 
-
 export default function TaskTable({
-  
   tasks,
   onLogout,
   setOpen,
@@ -34,23 +30,20 @@ export default function TaskTable({
 }: TaskTableProps) {
   return (
     <div className="max-w-5xl mx-auto  pt-3 py-40 bg-blue-50">
-
       <div className="bg-white shadow-xl pb-6 px-7 w-full max-w-5xl rounded-3xl">
-
         <div className="flex justify-end gap-2  p-6 ">
-
           <Button
             className="bg-blue-600 transition-all duration-300 hover:scale-105 flex  hover:bg-blue-700 text-white px-5  py-2 rounded-full"
             onClick={() => setOpen(true)}
           >
-             Add Task
+            Add Task
           </Button>
 
           <Button
             onClick={onLogout}
             className="bg-red-400 hover:bg-red-500 text-white rounded-full px-6 transition-all duration-300 hover:scale-105"
           >
-           Logout
+            Logout
           </Button>
         </div>
 
@@ -66,8 +59,6 @@ export default function TaskTable({
           </TableHeader>
 
           <TableBody>
-              
-  
             {!tasks || tasks.length === 0 ? (
               <TableRow></TableRow>
             ) : (
@@ -79,7 +70,7 @@ export default function TaskTable({
 
                   <TableCell className="text-right space-x-2">
                     <Button
-                    className="rounded-full hover:bg-black hover:text-white"
+                      className="rounded-full hover:bg-black hover:text-white"
                       variant="outline"
                       size="sm"
                       onClick={() => {
@@ -91,7 +82,7 @@ export default function TaskTable({
                     </Button>
 
                     <Button
-                    className="rounded-full bg-red-300 hover:bg-red-600"
+                      className="rounded-full bg-red-300 hover:bg-red-600"
                       variant="destructive"
                       size="sm"
                       onClick={() => {

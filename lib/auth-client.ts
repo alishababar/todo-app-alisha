@@ -38,7 +38,7 @@ export const signOut = async () => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({})
+    body: JSON.stringify({}),
   });
 
   if (!res.ok) {
@@ -47,4 +47,3 @@ export const signOut = async () => {
 
   return res;
 };
-

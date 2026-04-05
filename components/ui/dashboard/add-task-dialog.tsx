@@ -31,7 +31,7 @@ export default function AddTaskDialog({
     if (!title || !description || !dueDate) return;
 
     addTask({
-      id: Date.now(),
+      id: String(Date.now()),
       title,
       description,
       dueDate,

@@ -1,6 +1,3 @@
-            
-
-
 "use client";
 
 import {
@@ -35,25 +32,19 @@ export default function DeleteTaskDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="rounded-3xl p-8 shadow-2xl max-w-md">
-        
         <DialogHeader>
           <DialogTitle className="text-2xl text-center font-bold text-gray-800">
             Delete Task
           </DialogTitle>
         </DialogHeader>
 
-        <div className="mt-6 space-y-6 text-center">          
-
+        <div className="mt-6 space-y-6 text-center">
           <div className="space-y-2">
-            <p >
-              Are you sure you want to delete this task?
-            </p>
+            <p>Are you sure you want to delete this task?</p>
 
             <p className="text-sm text-gray-500 italic">
               "{selectedTask.title}"
             </p>
-
-           
           </div>
 
           {/* Buttons */}
@@ -73,7 +64,6 @@ export default function DeleteTaskDialog({
               Delete
             </Button>
           </div>
-
         </div>
       </DialogContent>
     </Dialog>

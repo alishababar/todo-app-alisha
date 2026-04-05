@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -55,7 +53,6 @@ export default function EditTaskDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="rounded-3xl p-8 shadow-2xl max-w-md">
-        
         <DialogHeader>
           <DialogTitle className="text-3xl text-center font-bold text-gray-800">
             Edit Task
@@ -63,7 +60,6 @@ export default function EditTaskDialog({
         </DialogHeader>
 
         <div className="space-y-6 mt-6">
-          
           <div className="space-y-2">
             <Label className="text-2sm ">Task Title</Label>
             <Input
@@ -87,7 +83,7 @@ export default function EditTaskDialog({
           <div className="space-y-2">
             <Label className="text-2sm">Due Date</Label>
             <Input
-            placeholder="YYYY-DD"
+              placeholder="YYYY-DD"
               className="rounded-xl focus:ring-2 focus:ring-blue-500"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
@@ -110,7 +106,6 @@ export default function EditTaskDialog({
               Update Task
             </Button>
           </div>
-
         </div>
       </DialogContent>
     </Dialog>
