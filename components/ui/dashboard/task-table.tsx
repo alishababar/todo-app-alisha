@@ -29,7 +29,7 @@ export default function TaskTable({
   setDeleteOpen,
 }: TaskTableProps) {
   return (
-    <div className="max-w-5xl mx-auto  pt-3 py-40 bg-blue-50">
+    <div className="max-w-5xl mx-auto  pt-3 py-40 bg-white">
       <div className="bg-white shadow-xl pb-6 px-7 w-full max-w-5xl rounded-3xl">
         <div className="flex justify-end gap-2  p-6 ">
           <Button
@@ -41,13 +41,12 @@ export default function TaskTable({
 
           <Button
             onClick={onLogout}
-            className="bg-red-400 hover:bg-red-500 text-white rounded-full px-6 transition-all duration-300 hover:scale-105"
+            className="bg-red-400 hover:bg-red-500  text-white rounded-full px-6 transition-all duration-300 hover:scale-105"
           >
             Logout
           </Button>
         </div>
 
-        {/* Table Section */}
         <Table>
           <TableHeader>
             <TableRow>
@@ -82,7 +81,7 @@ export default function TaskTable({
                     </Button>
 
                     <Button
-                      className="rounded-full bg-red-300 hover:bg-red-600"
+                      className="rounded-full bg-red-300 hover:bg-red-600 hover:text-white"
                       variant="destructive"
                       size="sm"
                       onClick={() => {

@@ -6,7 +6,7 @@ interface DashboardHeaderProps {
 
 export default function DashboardHeader({ userName }: DashboardHeaderProps) {
   return (
-    <header className="w-full flex bg-blue-50 justify-center pt-10 px-4">
+    <header className="w-full flex bg-white justify-center pt-10 px-4">
       <div className="w-full max-w-5xl bg-white/80 backdrop-blur-md rounded-3xl shadow-xl px-6 md:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="text-2xl font-bold text-gray-800 tracking-wide">
           <span className="text-black">TaskFlow</span>
