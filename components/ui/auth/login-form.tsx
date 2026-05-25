@@ -18,7 +18,7 @@ export default function LoginForm() {
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // prevent page reload
+    e.preventDefault(); 
     setLoading(true);
     setError("");
     try{
@@ -31,7 +31,7 @@ export default function LoginForm() {
 });
 
 if (!res.ok) {
-  const data = await res.json(); // 👈 parse JSON instead of text
+  const data = await res.json(); 
   throw new Error(data.message || "Login failed");
 }
 
@@ -45,7 +45,7 @@ router.push("/dashboard");
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
+    <div className="flex items-center justify-center min-h-screen bg-white px-4">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader>
           <CardTitle className="text-2xl text-center text-blue-900 font-bold">

@@ -1,12 +1,22 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
 import { useState, useEffect } from "react";
+
 import DashboardHeader from "@/components/ui/dashboard/dashboard-header";
 import TaskTable from "@/components/ui/dashboard/task-table";
+
 import AddTaskDialog from "@/components/ui/dashboard/add-task-dialog";
 import EditTaskDialog from "@/components/ui/dashboard/edit-task-dialog";
 import DeleteTaskDialog from "@/components/ui/dashboard/delete-task-dialog";
+
 import SubscribeSection from "@/components/ui/dashboard/subscribebutton";
+
+import SearchInput from "@/components/tasks/search-input";
+import Pagination from "@/components/tasks/pagination";
+import SortSelect from "@/components/tasks/sort";
+import Filters from "@/components/tasks/task-filter";
 
 export interface Task {
   id: string;
@@ -18,48 +28,71 @@ export interface Task {
 export type NewTask = Omit<Task, "id">;
 
 export default function DashboardPage() {
+  const searchParams = useSearchParams();
   const [tasks, setTasks] = useState<Task[]>([]);
+
+  const [totalPages, setTotalPages] = useState(1);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
   const [open, setOpen] = useState(false);
+
   const [editOpen, setEditOpen] = useState(false);
+
   const [deleteOpen, setDeleteOpen] = useState(false);
+
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const res = await fetch("/api/tasks");
+        const params = new URLSearchParams(searchParams.toString());
+
+        const res = await fetch(`/api/tasks?${params.toString()}`);
+
         const data = await res.json();
-        setTasks(data);
+
+        setTasks(data.tasks);
+
+        setTotalPages(data.totalPages);
+
+        setCurrentPage(data.currentPage);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchTasks();
-  }, []);
+  }, [searchParams.toString()]);
 
   const addTask = async (task: NewTask) => {
     try {
       const res = await fetch("/api/tasks", {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify(task),
       });
 
       if (!res.ok) {
         const err = await res.json();
+
         alert(err.error);
+
         return;
       }
 
       const newTask = await res.json();
+
       setTasks((prev) => [...prev, newTask]);
     } catch (error) {
       console.error(error);
     }
   };
+
   const updateTask = (updatedTask: Task) => {
     setTasks((prev) =>
       prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
@@ -74,6 +107,12 @@ export default function DashboardPage() {
     <div>
       <DashboardHeader />
 
+      <SearchInput  />
+
+      <Filters />
+
+      <SortSelect />
+
       <TaskTable
         tasks={tasks}
         setOpen={setOpen}
@@ -81,6 +120,9 @@ export default function DashboardPage() {
         setSelectedTask={setSelectedTask}
         setDeleteOpen={setDeleteOpen}
       />
+
+      <Pagination currentPage={currentPage} totalPages={totalPages} />
+
       <SubscribeSection />
 
       <AddTaskDialog open={open} setOpen={setOpen} addTask={addTask} />
