@@ -6,7 +6,6 @@ CREATE TABLE "Task" (
     "dueDate" TIMESTAMP(3),
     "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CREATE UNIQUE INDEX "user_stripeCustomerId_key" ON "user"("stripeCustomerId"),
 
     CONSTRAINT "Task_pkey" PRIMARY KEY ("id")
 );
@@ -20,6 +19,8 @@ CREATE TABLE "user" (
     "image" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "stripeCustomerId" TEXT,
+    "subscriptionPlan" TEXT,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
@@ -69,14 +70,38 @@ CREATE TABLE "verification" (
     CONSTRAINT "verification_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Conversation" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Conversation_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Message" (
+    "id" TEXT NOT NULL,
+    "role" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "conversationId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Message_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
 -- CreateIndex
-CREATE INDEX "session_userId_idx" ON "session"("userId");
+CREATE UNIQUE INDEX "user_stripeCustomerId_key" ON "user"("stripeCustomerId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "session_token_key" ON "session"("token");
+
+-- CreateIndex
+CREATE INDEX "session_userId_idx" ON "session"("userId");
 
 -- CreateIndex
 CREATE INDEX "account_userId_idx" ON "account"("userId");
@@ -92,3 +117,6 @@ ALTER TABLE "session" ADD CONSTRAINT "session_userId_fkey" FOREIGN KEY ("userId"
 
 -- AddForeignKey
 ALTER TABLE "account" ADD CONSTRAINT "account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Message" ADD CONSTRAINT "Message_conversationId_fkey" FOREIGN KEY ("conversationId") REFERENCES "Conversation"("id") ON DELETE CASCADE ON UPDATE CASCADE;

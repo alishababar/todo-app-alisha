@@ -32,7 +32,7 @@ export const signIn = async (email: string, password: string) => {
   return data;
 };
 
-export const signOut = async () => {
+export const signOut = async (p0: string) => {
   const res = await fetch("/api/auth/sign-out", {
     method: "POST",
     headers: {

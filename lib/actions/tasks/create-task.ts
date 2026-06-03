@@ -10,14 +10,34 @@ export async function createTask(data: {
   description: string;
   dueDate: string;
 }) {
-  const headersList = await headers();
 
   const session = await auth.api.getSession({
-    headers: headersList,
+    headers: await headers(),
   });
 
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+return{
+  success: false,
+  message: "Unauthorized",
+  };
+  }
+     const userId = session.user.id;
+
+    const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  const isPro = user?.subscriptionPlan === "pro";
+
+  const tasksCount = await prisma.task.count({
+    where: { userId },
+  });
+
+  if (!isPro && tasksCount >= 5) {
+    return {
+      success: false,
+      error: "Free users can only create up to 5 tasks. Upgrade to Pro.",
+    };
   }
 
   await prisma.task.create({
@@ -29,5 +49,8 @@ export async function createTask(data: {
     },
   });
 
-  revalidatePath("/dashboard");
-}
+revalidatePath("/dashboard");
+
+  return {
+    success: true,
+  };}
