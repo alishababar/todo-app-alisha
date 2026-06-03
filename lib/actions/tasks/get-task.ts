@@ -5,14 +5,17 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 export async function getTasks(search?: string) {
-  const headersList = await headers();
 
   const session = await auth.api.getSession({
-    headers: headersList,
+    headers: await headers(),
   });
 
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+return {
+  tasks: [],
+  total_pages: 0,
+  current_page: 1,
+  };
   }
 
   const trimmedSearch = search?.trim();

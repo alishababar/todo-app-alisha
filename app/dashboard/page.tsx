@@ -17,6 +17,7 @@ import SearchInput from "@/components/tasks/search-input";
 import Pagination from "@/components/tasks/pagination";
 import SortSelect from "@/components/tasks/sort";
 import Filters from "@/components/tasks/task-filter";
+import { signOut } from "@/lib/auth-client";
 
 export interface Task {
   id: string;
@@ -49,6 +50,13 @@ export default function DashboardPage() {
         const params = new URLSearchParams(searchParams.toString());
 
         const res = await fetch(`/api/tasks?${params.toString()}`);
+        if (res.status === 401) {
+          window.location.href = "/login";
+          return;
+          }
+        if (!res.ok) {
+          throw new Error("Failed to fetch tasks");
+        }
 
         const data = await res.json();
 
@@ -63,7 +71,7 @@ export default function DashboardPage() {
     };
 
     fetchTasks();
-  }, [searchParams.toString()]);
+  }, [searchParams]);
 
   const addTask = async (task: NewTask) => {
     try {
@@ -114,12 +122,13 @@ export default function DashboardPage() {
       <SortSelect />
 
       <TaskTable
-        tasks={tasks}
-        setOpen={setOpen}
-        setEditOpen={setEditOpen}
-        setSelectedTask={setSelectedTask}
-        setDeleteOpen={setDeleteOpen}
-      />
+  tasks={tasks}
+  setOpen={setOpen}
+  setEditOpen={setEditOpen}
+  setSelectedTask={setSelectedTask}
+  setDeleteOpen={setDeleteOpen}
+onLogout={() => signOut("/login")}
+/>
 
       <Pagination currentPage={currentPage} totalPages={totalPages} />
 
